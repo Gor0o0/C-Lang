@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 using namespace std;
 
 // передача параметров функций
@@ -55,19 +55,35 @@ void HealByPointer(int* hp, int amount, int maxHp) {
     }
 }
 
-// Задание:
-
+int CalculateDamage(int baseDamage, float multiplier, int armor)
+{
+    float multup = baseDamage * multiplier;
+    float armor = multup - armor;
+    if (armor < 0.0f)
+    {
+        armor = 0.0f;
+    }
+    return static_cast<int>(round(armor));
+}
 int main()
 {
-    CharacterStats oleg{ "Oleg", 80, 100, 20 };
+    CharacterStats oleg{"oleg", 50, 100, 20};
     PrintPlayer(oleg);
+    int playerHP = 50;
+    int maxHP = 100;
+    
+    HealByPointer(&playerHP, 50, maxHP);// Передаем адрес player hp через оператор &
 
-    int playerHp = 50;
-    int maxHp = 100;
+    cout << "playerHP" << ":" << playerHP << endl;
+    // &playerHp - это адрес переменной
+    // hp* - это указатель на значение по этому адресу
+    
+    float critM = 1.5f;
+    int baseDamage = 40;     
+    int armorHis = 20;      
+    int finale = CalculateDamage(baseDamage, critM, armorHis);
 
-    HealByPointer(&playerHp, 50, maxHp); // педаём адрес  playerHp через оператора &
-
-    cout << "Player hp: " << playerHp << endl;
+    cout << "Final Damage: " << finale << endl;
 
     return 0;
 }
