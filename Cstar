@@ -1,0 +1,26 @@
+#include <iostream>
+
+int main()
+{
+    int n;
+    std::cout << "Введите размер (нечётное число >= 5): ";
+    if (!(std::cin >> n) || n < 5 || n % 2 == 0)
+    {
+        std::cout << "Ошибка: нужен нечётный размер >= 5.\n";
+        return 0;
+    }
+
+    int mid = n / 2;
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            bool isStar = (i == mid) || (j == mid) || (i == j) || (i + j == n - 1);
+            std::cout << (isStar ? '*' : ' ');
+        }
+        std::cout << '\n';
+    }
+
+    return 0;
+}
